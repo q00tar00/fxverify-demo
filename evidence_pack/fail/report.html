@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>fxverify report - SAMPLE_FAIL</title>
+<style>
+body { font-family: system-ui, sans-serif; margin: 2rem; }
+table { border-collapse: collapse; }
+th, td { border: 1px solid #ccc; padding: 4px 8px; }
+.summary { background: #f5f5f5; padding: 1rem; border-radius: 6px; }
+.status-ok, .verdict-pass { background: #e8f5e9; }
+.status-warn { background: #fff8e1; }
+.status-flag, .verdict-fail_strategy, .verdict-insufficient_data { background: #ffebee; }
+</style>
+</head>
+<body>
+<section class="summary">
+<h1>Verdict summary - SAMPLE_FAIL</h1>
+<p><strong>WFA verdict:</strong> FAIL_STRATEGY</p>
+<p>This does not certify profitability; it documents robustness checks.</p>
+<p><strong>Audit verdict:</strong> GO (GO: estimated 20.0 trades vs gate 20 (drop&lt;0.5x, pivot&lt;1.0x), pairs 1/1 required)</p>
+<p><strong>OOS pass ratio:</strong> 0.00</p>
+<p><strong>Aggregate:</strong> PF 0.1288 / max DD 0.5282% / Sharpe -0.8374 / trades 31</p>
+</section>
+
+<h2>Strategy</h2>
+<ul>
+<li>name: sma_crossover</li>
+<li>params: fast=3, slow=8</li>
+</ul>
+
+<h2>Red-flag checklist</h2>
+<table>
+<tr><th>item</th><th>status</th><th>detail</th></tr>
+<tr class="status-ok"><td>Min-trades gate</td><td>OK</td><td>All evaluated folds met the min-trades floor.</td></tr><tr class="status-flag"><td>Parameter OOS drift</td><td>FLAG</td><td>0/10 parameter sets passed; verdict_flip=true, pf_range=0.32, sharpe_range=0.95.</td></tr><tr class="status-ok"><td>Look-ahead risk</td><td>OK</td><td>Signals were stable across truncated probes; fills still use same-bar close policy. Same-bar close fills are used by this simulator.</td></tr>
+</table>
+
+<h2>Parameter robustness</h2>
+<p>Drift summary: 0/10 parameter sets passed; verdict_flip=true; pf_range=0.32; sharpe_range=0.95.</p>
+<table>
+<tr><th>params</th><th>PF</th><th>Sharpe</th><th>trades</th><th>OOS pass ratio</th><th>verdict</th></tr>
+<tr class="verdict-fail_strategy"><td>fast=3, slow=6</td><td>0.1458</td><td>-0.8258</td><td>45</td><td>0.00</td><td>FAIL_STRATEGY</td></tr><tr class="verdict-fail_strategy"><td>fast=3, slow=8</td><td>0.1288</td><td>-0.8374</td><td>31</td><td>0.00</td><td>FAIL_STRATEGY</td></tr><tr class="verdict-fail_strategy"><td>fast=4, slow=10</td><td>0.2683</td><td>-0.5105</td><td>21</td><td>0.00</td><td>FAIL_STRATEGY</td></tr><tr class="verdict-fail_strategy"><td>fast=5, slow=12</td><td>0.2658</td><td>-0.5066</td><td>17</td><td>0.00</td><td>FAIL_STRATEGY</td></tr><tr class="verdict-fail_strategy"><td>fast=5, slow=15</td><td>0.3175</td><td>-0.4309</td><td>17</td><td>0.00</td><td>FAIL_STRATEGY</td></tr><tr class="verdict-fail_strategy"><td>fast=6, slow=18</td><td>0.2388</td><td>-0.6268</td><td>13</td><td>0.00</td><td>FAIL_STRATEGY</td></tr><tr class="verdict-fail_strategy"><td>fast=8, slow=20</td><td>0.1087</td><td>-0.9518</td><td>10</td><td>0.00</td><td>FAIL_STRATEGY</td></tr><tr class="verdict-insufficient_data"><td>fast=8, slow=24</td><td>0.0</td><td>0.0</td><td>0</td><td>0.00</td><td>INSUFFICIENT_DATA</td></tr><tr class="verdict-insufficient_data"><td>fast=10, slow=30</td><td>0.0</td><td>0.0</td><td>0</td><td>0.00</td><td>INSUFFICIENT_DATA</td></tr><tr class="verdict-insufficient_data"><td>fast=12, slow=36</td><td>0.0</td><td>0.0</td><td>0</td><td>0.00</td><td>INSUFFICIENT_DATA</td></tr>
+</table>
+
+<h2>Data period</h2>
+<ul>
+<li>start: 2024-01-01 00:00:00</li>
+<li>end: 2024-02-03 07:00:00</li>
+<li>bars: 800</li>
+<li>symbol: SAMPLE_FAIL</li>
+</ul>
+
+<h2>Assumptions</h2>
+<ul>
+<li>spread: 5e-05</li>
+<li>fee: 5e-05</li>
+<li>contract_multiplier: 100000.0</li>
+</ul>
+
+<h2>Fold settings</h2>
+<ul>
+<li>train_bars: 200</li>
+<li>test_bars: 100</li>
+<li>folds: 4</li>
+<li>min_oos_pass_ratio: 0.6</li>
+<li>min_trades_floor: 5</li>
+</ul>
+
+<h2>Aggregate metrics</h2>
+<table>
+<tr><th>PF</th><th>max DD%</th><th>Sharpe</th><th>trades</th></tr>
+<tr><td>0.1288</td><td>0.5282</td><td>-0.8374</td><td>31</td></tr>
+</table>
+
+<h2>Fail reasons</h2>
+<ul><li>oos_pass_ratio 0.00 &lt; 0.6</li><li>aggregate PF 0.1288 &lt; 1.1</li><li>aggregate Sharpe -0.8374 &lt; 0.05</li></ul>
+
+<h2>Caveats / assumptions</h2>
+<ul>
+<li>Lookahead: signals are applied only on the bar they are emitted; no future bars are consulted, but buyers must verify their own signal function does not peek ahead.</li>
+<li>Slippage: this engine assumes close-to-close fills at the bar close; real-world slippage is not modeled beyond the configured spread/fee.</li>
+<li>Sampling bias: fold count and bar count are limited; a small number of OOS folds can overstate or understate robustness.</li>
+</ul>
+
+<h2>Fold drilldown</h2>
+<table>
+<tr><th>fold</th><th>PF</th><th>DD%</th><th>Sharpe</th><th>win rate</th><th>trades</th><th>verdict</th></tr>
+<tr><td>fold 1</td><td>0.3438</td><td>0.1212</td><td>-0.4227</td><td>0.4286</td><td>7</td><td>FAIL_STRATEGY</td></tr><tr><td>fold 2</td><td>0.1737</td><td>0.1883</td><td>-0.7864</td><td>0.2222</td><td>9</td><td>FAIL_STRATEGY</td></tr><tr><td>fold 3</td><td>0.0</td><td>0.14</td><td>-1.4293</td><td>0.0</td><td>8</td><td>FAIL_STRATEGY</td></tr><tr><td>fold 4</td><td>0.0</td><td>0.1409</td><td>-1.0812</td><td>0.0</td><td>7</td><td>FAIL_STRATEGY</td></tr>
+</table>
+
+<h2>Reproducibility</h2>
+<ul>
+<li>input file hash: 644c8e9e289b9a5ab1d746b28788efb136812d79de02687a57cf666059ae9726</li>
+<li>config hash: 0f3419a642025c6ccb8afc5a271592030d53f6d9f4e7ad779899e06ce11a1004</li>
+</ul>
+</body>
+</html>
