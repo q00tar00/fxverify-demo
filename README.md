@@ -2,7 +2,7 @@
 
 **See what a strategy robustness evidence pack looks like before you sell or trade an EA or Python strategy.**
 
-This is the public showcase for [fxverify](https://gumroad.com/) — a local,
+This is the public showcase for [fxverify](https://q00tar.gumroad.com/l/wnplqk) — a local,
 buy-once tool that turns a backtest of *any* OHLCV strategy (FX, stocks, ETFs,
 crypto) into a reproducible robustness report you can publish next to your
 product page, README, or client hand-off.
@@ -95,16 +95,17 @@ Export a CSV (e.g. via yfinance) and run the same pipeline.
 The tool is the same in every edition — you evaluate the whole thing for free,
 then pay for the **right to use it commercially** and the seller extras.
 
-- **Free / Lite ($0)** — the full tool + CLI under a **noncommercial license**.
-  Try it on your own data: sample data, the red-flag checklist, and this evidence
-  pack sample are included.
-- **Core ($49, buy-once)** — a **commercial-use license** to generate and publish
-  evidence packs for strategies you sell.
-- **Pro ($99, buy-once)** — the same commercial license as Core **plus the seller
-  kit**: MT5 → evidence pack walkthrough, framework adapter examples, and a CI
-  recipe.
+- **[Free / Lite ($0)](https://q00tar.gumroad.com/l/wnplqk)** — the full tool + CLI
+  under a **noncommercial license**. Try it on your own data: sample data, the
+  red-flag checklist, and this evidence pack sample are included.
+- **[Core ($49, buy-once)](https://q00tar.gumroad.com/l/kmecj)** — a
+  **commercial-use license** to generate and publish evidence packs for strategies
+  you sell.
+- **[Pro ($99, buy-once)](https://q00tar.gumroad.com/l/glyrq)** — the same
+  commercial license as Core **plus the seller kit**: MT5 → evidence pack
+  walkthrough, framework adapter examples, and a CI recipe.
 
-→ **[Get it on Gumroad](https://gumroad.com/)** *(link goes live at launch)*
+→ **[Start with fxverify Lite — free](https://q00tar.gumroad.com/l/wnplqk)**
 
 Runs locally. Your data and your strategy never leave your machine — no upload,
 no account, no subscription.
